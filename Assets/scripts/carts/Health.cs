@@ -10,7 +10,7 @@ public class Health : MonoBehaviour
     private int _currentHealth; 
     private Animator _animator; 
 
-    private CartBehaviour _playerController; 
+    private CartMovement _playerController; 
     private BoxCollider _boxCollider; 
     private Rigidbody _rigidbody; 
 
@@ -23,7 +23,7 @@ public class Health : MonoBehaviour
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        _playerController = GetComponent<CartBehaviour>(); 
+        _playerController = GetComponent<CartMovement>(); 
         _boxCollider = GetComponent<BoxCollider>(); 
         _rigidbody = GetComponent<Rigidbody>(); 
 

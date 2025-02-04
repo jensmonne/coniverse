@@ -2,13 +2,11 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class CartBehaviour : MonoBehaviour
+public class CartMovement : MonoBehaviour
 {
     [SerializeField] private float acceleration = 20f;
     [SerializeField] private float maxSpeed = 10f;
     [SerializeField] private float rotationSpeed = 100f;
-    [SerializeField] private float friction = 0.98f;
-    [SerializeField] private float bounceForce = 500f;
 
     private Rigidbody rb;
     private Vector3 moveDirection;
@@ -30,7 +28,6 @@ public class CartBehaviour : MonoBehaviour
     private void FixedUpdate()
     {
         MoveCart();
-        ApplyFriction();
     }
 
     private void HandleInput()
@@ -55,27 +52,6 @@ public class CartBehaviour : MonoBehaviour
         if (moveDirection != Vector3.zero)
         {
             rb.AddForce(moveDirection, ForceMode.Acceleration);
-        }
-
-        if (rb.linearVelocity.magnitude > maxSpeed)
-        {
-            rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
-        }
-    }
-
-    private void ApplyFriction()
-    {
-        rb.linearVelocity *= friction;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("colided");
-        if (collision.gameObject.CompareTag("BumperCart"))
-        {
-            Debug.Log("BumperCart");
-            Vector3 bounceDirection = (transform.position - collision.transform.position).normalized;
-            rb.AddForce(bounceDirection * bounceForce, ForceMode.Impulse);
         }
     }
 }
