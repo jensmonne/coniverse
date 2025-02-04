@@ -10,7 +10,7 @@ public class DamageScript : MonoBehaviour
         }
     }
 
-    private void Damage(GameObject cart)
+    private static void Damage(GameObject cart)
     {
         Health cartHealth = cart.GetComponent<Health>();
         if (cartHealth != null)
