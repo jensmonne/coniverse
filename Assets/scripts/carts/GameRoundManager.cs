@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class GameRoundManager : MonoBehaviour
 {
-    public List<PlayerHealth> players;
+    public List<Health> players;
     public static GameRoundManager Instance;
 
     private void Start()
     {
 
-        players = new List<PlayerHealth>(FindObjectsOfType<PlayerHealth>());
+        players = new List<Health>(FindObjectsOfType<Health>());
 
 
         for (int i = 0; i < players.Count; i++)
@@ -25,7 +25,7 @@ public class GameRoundManager : MonoBehaviour
 
     public void CheckForRoundWinner()
 {
-    PlayerHealth survivingPlayer = null;
+    Health survivingPlayer = null;
     
     foreach (var player in players)
     {
@@ -61,7 +61,7 @@ public class GameRoundManager : MonoBehaviour
 }
 
 
-    private void PlayerWins(PlayerHealth winner)
+    private void PlayerWins(Health winner)
     {
         int winnerIndex = winner.PlayerID; 
 
@@ -88,13 +88,13 @@ public class GameRoundManager : MonoBehaviour
 
         if (GameManager.Instance.IsGameOver())
         {
-            Debug.Log('Game Over');
+            Debug.Log("Game Over");
         }
         else
         {
             // sets the new round up
             GameManager.Instance.NextRound();
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("BumberCars");
         }
     }
 }
