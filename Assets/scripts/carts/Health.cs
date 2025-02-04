@@ -4,48 +4,41 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    public int PlayerID; // Assign a unique ID for each player
+    public int PlayerID; 
     public bool IsAlive = true;
-    public int maxHealth = 100; // Maximum health for the player
-    private int _currentHealth; // Current health of the player
-    private Animator _animator; // Animator for handling animations
-    public Image healthBar; // Reference to the health bar UI element
+    public int maxHealth = 100; 
+    private int _currentHealth; 
+    private Animator _animator; 
 
-    private PlayerController _playerController; // Reference to PlayerController script
-    private BoxCollider2D _boxCollider; // Reference to BoxCollider2D
-    private Rigidbody2D _rigidbody; // Reference to Rigidbody2D
-    
-    public AudioSource HitSound;
-    public AudioSource DeathSound;
-    
-    public ParticleSystem DeathParticles;
+    private CartBehaviour _playerController; 
+    private BoxCollider _boxCollider; 
+    private Rigidbody _rigidbody; 
 
-    private Gamepad _playerGamepad; // The gamepad assigned to this player
-    private PlayerInput _playerInput; // The PlayerInput component associated with this player
+    private Gamepad _playerGamepad; 
+    private PlayerInput _playerInput; 
     
     public static Health instance;
     public GameRoundManager gameRoundManager;
 
     private void Start()
     {
-        _animator = GetComponent<Animator>();// gets animator
-        _playerController = GetComponent<PlayerController>(); // gets player controller
-        _boxCollider = GetComponent<BoxCollider2D>(); // gets box colidder
-        _rigidbody = GetComponent<Rigidbody2D>(); // gets rigibody
+        _animator = GetComponent<Animator>();
+        _playerController = GetComponent<CartBehaviour>(); 
+        _boxCollider = GetComponent<BoxCollider>(); 
+        _rigidbody = GetComponent<Rigidbody>(); 
 
-        _currentHealth = maxHealth; // sets the current health to the max health
-        _animator.SetBool("IsDead", false); // sets the animation to false
+        _currentHealth = maxHealth; 
+        _animator.SetBool("IsDead", false);
 
-        AssignGamepad(); // assigns a controller so that the player dont swap controllers when playing
+        AssignGamepad(); 
 
-        // Initialize GameRoundManager at the start
+
         if (gameRoundManager == null)
         {
             gameRoundManager = FindObjectOfType<GameRoundManager>(); 
         }
     }
-
-
+    
     private void AssignGamepad()
     {
         _playerInput = GetComponent<PlayerInput>(); // gets playerinput so set a controller to it
@@ -59,44 +52,26 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
-        _currentHealth -= damageAmount; // do's the damageamount - the currenthealth to get a new current health
-        _currentHealth = Mathf.Clamp(_currentHealth, 0, maxHealth); // Ensure health stays within valid range
-        UpdateHealthBar(); // sets healthbar to new currenthealth
-
-        _animator.SetTrigger("Hit"); // triggers the animation
-
-        HitSound.Play(); // plays hit sound
-
-        if (_currentHealth <= 0) // if the health is 0 or below the the player is dead
+        _currentHealth -= damageAmount; 
+        _currentHealth = Mathf.Clamp(_currentHealth, 0, maxHealth); 
+        
+        if (_currentHealth <= 0) 
         {
             Die();
-        }
-    }
-
-    private void UpdateHealthBar() // update's the health bar to current health
-    {
-        if (healthBar != null)
-        {
-            healthBar.fillAmount = (float)_currentHealth / maxHealth;
         }
     }
 
     public void Die()
     {
         IsAlive = false; // sets is alive to fals
-        _animator.SetBool("IsDead", true); // plays death animation
-
-        DeathSound.Play(); // plays death sound
-        DeathParticles.Play(); // shows the death particals
-
-        // Disable player control, collider, and rigidbody
+        
         if (_playerController != null)
             _playerController.enabled = false;
 
         if (_boxCollider != null)
             _boxCollider.enabled = false;
 
-        if (gameRoundManager != null) // checks if ther is a gameroundmanager so he can send who died
+        if (gameRoundManager != null) 
         {
             gameRoundManager.CheckForRoundWinner();
         }
@@ -104,21 +79,5 @@ public class Health : MonoBehaviour
         {
             Debug.LogWarning("GameRoundManager not found! Could not notify about player death.");
         }
-    }
-
-
-    private void OnCollisionEnter(Collision collision) // this is how he takes damage
-    {
-        Dodgeball dodgeball = collision.gameObject.GetComponent<Dodgeball>();
-        if (dodgeball != null)
-        {
-            TakeDamage(dodgeball.damage);
-        }
-    }
-
-    public void SetHealthBar(Image newHealthBar) // sets the health bar a beginning
-    {
-        healthBar = newHealthBar;
-        UpdateHealthBar(); 
     }
 }
