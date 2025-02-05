@@ -6,10 +6,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float acceleration = 20f;
     [SerializeField] private float maxSpeed = 10f;
     [SerializeField] private float rotationSpeed = 100f;
+    [SerializeField] private float bumpForce = 1000f;
 
     private Rigidbody rb;
     private Vector3 moveDirection;
-
     private InputAction moveAction;
 
     private void Awake()
@@ -63,6 +63,15 @@ public class PlayerMovement : MonoBehaviour
         if (moveDirection != Vector3.zero && rb.linearVelocity.magnitude < maxSpeed)
         {
             rb.AddForce(moveDirection, ForceMode.Acceleration);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("BumperCart"))
+        {
+            Vector3 bumpDirection = (transform.position - collision.transform.position).normalized;
+            rb.AddForce(bumpDirection * bumpForce, ForceMode.Impulse);
         }
     }
 }
