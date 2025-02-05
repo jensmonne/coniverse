@@ -10,8 +10,8 @@ public class Health : MonoBehaviour
     private int _currentHealth; 
     private Animator _animator; 
 
-    private CartMovement _playerController; 
-    private BoxCollider _boxCollider; 
+    private PlayerMovement _playerController; 
+    private MeshCollider _meshCollider; 
     private Rigidbody _rigidbody; 
 
     private Gamepad _playerGamepad; 
@@ -22,13 +22,11 @@ public class Health : MonoBehaviour
 
     private void Start()
     {
-        _animator = GetComponent<Animator>();
-        _playerController = GetComponent<CartMovement>(); 
-        _boxCollider = GetComponent<BoxCollider>(); 
+        _playerController = GetComponent<PlayerMovement>(); 
+        _meshCollider = GetComponentInChildren<MeshCollider>(); 
         _rigidbody = GetComponent<Rigidbody>(); 
 
         _currentHealth = maxHealth; 
-        _animator.SetBool("IsDead", false);
 
         AssignGamepad(); 
 
@@ -68,8 +66,8 @@ public class Health : MonoBehaviour
         if (_playerController != null)
             _playerController.enabled = false;
 
-        if (_boxCollider != null)
-            _boxCollider.enabled = false;
+        if (_meshCollider != null)
+            _meshCollider.enabled = false;
 
         if (gameRoundManager != null) 
         {

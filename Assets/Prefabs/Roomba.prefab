@@ -76,7 +76,10 @@ PrefabInstance:
       addedObject: {fileID: 338758142172511083}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6049b2f4dd2265a4a95767914f61f59a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9021978097181974843}
+      addedObject: {fileID: 5913413129316504128}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6049b2f4dd2265a4a95767914f61f59a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1688710459351413087}
     - targetCorrespondingSourceObject: {fileID: 8164078558771037576, guid: 6049b2f4dd2265a4a95767914f61f59a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1806566127623071388}
@@ -143,7 +146,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &9021978097181974843
+--- !u!114 &5913413129316504128
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,14 +155,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 4448580498702363370}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6ca96292ce893248ba93d3c4422f4a1, type: 3}
+  m_Script: {fileID: 11500000, guid: b94e8e973cd958d448e74b38f2defb22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerID: 0
+  IsAlive: 1
+  maxHealth: 100
+  gameRoundManager: {fileID: 0}
+--- !u!114 &1688710459351413087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4448580498702363370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45eaa9102e1ae2141b488c55d928c55d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: 20
   maxSpeed: 10
   rotationSpeed: 100
-  friction: 0.98
-  bounceForce: 500
 --- !u!1 &4625552528950497843 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8164078558771037576, guid: 6049b2f4dd2265a4a95767914f61f59a, type: 3}
