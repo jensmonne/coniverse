@@ -6,8 +6,10 @@ public class Health : MonoBehaviour
 {
     public int PlayerID; 
     public bool IsAlive = true;
-    public int maxHealth = 100; 
+    public int maxHealth = 4; 
+    public int maxShield = 2;
     private int _currentHealth; 
+    private int _currentShield;
     private Animator _animator; 
 
     private PlayerMovement _playerController; 
@@ -27,6 +29,7 @@ public class Health : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>(); 
 
         _currentHealth = maxHealth; 
+        _currentShield = maxShield;
 
         AssignGamepad(); 
 
@@ -50,8 +53,16 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
-        _currentHealth -= damageAmount; 
-        _currentHealth = Mathf.Clamp(_currentHealth, 0, maxHealth); 
+        if (_currentShield > 0)
+        {
+            _currentShield -= damageAmount;
+            _currentShield = Mathf.Clamp(_currentShield, 0, maxShield);
+        }
+        else
+        {
+            _currentHealth -= damageAmount; 
+            _currentHealth = Mathf.Clamp(_currentHealth, 0, maxHealth);
+        }
         
         if (_currentHealth <= 0) 
         {
@@ -59,7 +70,19 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void Die()
+    public void RegainHealth(int healthAmount)
+    {
+        _currentHealth += healthAmount;
+        _currentHealth = Mathf.Clamp(_currentHealth, 0, maxHealth);
+    }
+
+    public void RegainShield(int shieldAmount)
+    {
+        _currentShield += shieldAmount;
+        _currentShield = Mathf.Clamp(_currentShield, 0, maxShield);
+    }
+
+    private void Die()
     {
         IsAlive = false; // sets is alive to fals
         

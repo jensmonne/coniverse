@@ -3,10 +3,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float acceleration = 20f;
-    [SerializeField] private float maxSpeed = 10f;
-    [SerializeField] private float rotationSpeed = 100f;
-    [SerializeField] private float bumpForce = 1000f;
+    public float acceleration = 20f;
+    public float maxSpeed = 10f;
+    public float rotationSpeed = 100f;
+    public float bumpForce = 1000f;
 
     private Rigidbody rb;
     private Vector3 moveDirection;
