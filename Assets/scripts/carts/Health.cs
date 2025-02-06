@@ -46,7 +46,7 @@ public class Health : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        healthbarFill.fillAmount = _currentHealth / maxHealth;
+        healthbarFill.fillAmount = (float)_currentHealth / maxHealth;
     }
     private void AssignGamepad()
     {
