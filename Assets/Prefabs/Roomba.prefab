@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roomba
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6049b2f4dd2265a4a95767914f61f59a, type: 3}
+      propertyPath: m_TagString
+      value: BumperCart
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -177,6 +181,7 @@ MonoBehaviour:
   acceleration: 20
   maxSpeed: 10
   rotationSpeed: 100
+  bumpForce: 1200
 --- !u!1 &4625552528950497843 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8164078558771037576, guid: 6049b2f4dd2265a4a95767914f61f59a, type: 3}
