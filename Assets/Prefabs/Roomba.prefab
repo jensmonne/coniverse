@@ -428,7 +428,7 @@ MonoBehaviour:
   maxHealth: 100
   maxShield: 2
   gameRoundManager: {fileID: 0}
-  healthbarFill: {fileID: 0}
+  healthbarFill: {fileID: 8141883777407879225}
 --- !u!114 &1688710459351413087
 MonoBehaviour:
   m_ObjectHideFlags: 0

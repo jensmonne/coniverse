@@ -41,6 +41,12 @@ public class Health : MonoBehaviour
         {
             gameRoundManager = FindObjectOfType<GameRoundManager>(); 
         }
+
+        if (healthbarFill == null)
+        {
+            // hier de healthbar fill zoeken om crashen te voorkomen
+        }
+        
         UpdateHealthBar();
     }
 
