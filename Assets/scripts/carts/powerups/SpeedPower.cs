@@ -8,7 +8,16 @@ public class SpeedPower : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         SpeedBoost(collision.gameObject);
-        Destroy(gameObject);
+        HideObject();
+    }
+    
+    private void HideObject()
+    {
+        MeshRenderer mesh = GetComponent<MeshRenderer>();
+        if (mesh != null) mesh.enabled = false;
+
+        Collider col = GetComponent<Collider>();
+        if (col != null) col.enabled = false;
     }
     
     private void SpeedBoost(GameObject target)
@@ -27,6 +36,7 @@ public class SpeedPower : MonoBehaviour
         yield return new WaitForSeconds(boostDuration);
 
         ResetSpeed(pm);
+        Destroy(gameObject);
     }
 
     private static void SpeedUp(PlayerMovement pm)
