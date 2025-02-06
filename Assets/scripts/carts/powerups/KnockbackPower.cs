@@ -11,12 +11,6 @@ public class KnockbackPower : MonoBehaviour
     public void KnockbackUp()
     {
         PlayerMovement pm = GetComponent<PlayerMovement>();
-        pm.bumpForce += 200f;
-    }
-
-    public void KnockbackDown()
-    {
-        PlayerMovement pm = GetComponent<PlayerMovement>();
-        pm.bumpForce -= 200f;
+        pm.bumpForce += 600f;
     }
 }
