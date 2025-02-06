@@ -22,6 +22,9 @@ public class Health : MonoBehaviour
     public static Health instance;
     public GameRoundManager gameRoundManager;
 
+    public Image healthbarFill;
+    
+    
     private void Start()
     {
         _playerController = GetComponent<PlayerMovement>(); 
@@ -38,8 +41,13 @@ public class Health : MonoBehaviour
         {
             gameRoundManager = FindObjectOfType<GameRoundManager>(); 
         }
+        UpdateHealthBar();
     }
-    
+
+    private void UpdateHealthBar()
+    {
+        healthbarFill.fillAmount = _currentHealth / maxHealth;
+    }
     private void AssignGamepad()
     {
         _playerInput = GetComponent<PlayerInput>(); // gets playerinput so set a controller to it
@@ -68,6 +76,7 @@ public class Health : MonoBehaviour
         {
             Die();
         }
+        UpdateHealthBar();
     }
 
     public void RegainHealth(int healthAmount)

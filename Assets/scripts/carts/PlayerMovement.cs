@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public float acceleration = 20f;
     public float maxSpeed = 10f;
     public float rotationSpeed = 100f;
-    public float bumpForce = 1000f;
+    public float bumpForce = 1200f;
 
     private Rigidbody rb;
     private Vector3 moveDirection;
