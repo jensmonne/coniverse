@@ -6,10 +6,10 @@ public class Health : MonoBehaviour
 {
     public int PlayerID; 
     public bool IsAlive = true;
-    public int maxHealth = 4; 
-    public int maxShield = 2;
-    private int _currentHealth; 
-    private int _currentShield;
+    private int maxHealth = 4; 
+    private int maxShield = 2;
+    [SerializeField] private int _currentHealth; 
+    [SerializeField] private int _currentShield;
     private Animator _animator; 
 
     private PlayerMovement _playerController; 
@@ -32,7 +32,7 @@ public class Health : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>(); 
 
         _currentHealth = maxHealth; 
-        _currentShield = maxShield;
+        _currentShield = 0;
 
         AssignGamepad(); 
 
@@ -44,7 +44,7 @@ public class Health : MonoBehaviour
 
         if (healthbarFill == null)
         {
-            // hier de healthbar fill zoeken om crashen te voorkomen
+            healthbarFill = GetComponentInChildren<Image>();
         }
         
         UpdateHealthBar();
@@ -89,12 +89,14 @@ public class Health : MonoBehaviour
     {
         _currentHealth += healthAmount;
         _currentHealth = Mathf.Clamp(_currentHealth, 0, maxHealth);
+        UpdateHealthBar();
     }
 
     public void RegainShield(int shieldAmount)
     {
         _currentShield += shieldAmount;
         _currentShield = Mathf.Clamp(_currentShield, 0, maxShield);
+        UpdateHealthBar();
     }
 
     private void Die()

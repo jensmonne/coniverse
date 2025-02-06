@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2181178026559917233}
   - component: {fileID: 2468728509331414146}
   - component: {fileID: 7181354825517866154}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: HealthBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,8 +29,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1182712716416055494}
+  m_Children: []
   m_Father: {fileID: 5565496846333520858}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -88,7 +87,7 @@ GameObject:
   - component: {fileID: 2467237533342598522}
   - component: {fileID: 5089057473329368893}
   - component: {fileID: 5924478659346491546}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,6 +107,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2181178026559917233}
+  - {fileID: 1182712716416055494}
   m_Father: {fileID: 3960732014408249424}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 1182712716416055494}
   - component: {fileID: 7570839329912479050}
   - component: {fileID: 8141883777407879225}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: healthbarFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,12 +203,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9075382158755186135}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2181178026559917233}
+  m_Father: {fileID: 5565496846333520858}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -318,8 +318,16 @@ PrefabInstance:
       value: Roomba
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6049b2f4dd2265a4a95767914f61f59a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6049b2f4dd2265a4a95767914f61f59a, type: 3}
       propertyPath: m_TagString
       value: BumperCart
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 6049b2f4dd2265a4a95767914f61f59a, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -425,8 +433,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerID: 0
   IsAlive: 1
-  maxHealth: 100
-  maxShield: 2
+  _currentHealth: 0
+  _currentShield: 0
   gameRoundManager: {fileID: 0}
   healthbarFill: {fileID: 8141883777407879225}
 --- !u!114 &1688710459351413087
