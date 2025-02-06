@@ -2,9 +2,15 @@ using UnityEngine;
 
 public class HealthPower : MonoBehaviour
 {
-    public void Heal()
+    private void OnCollisionEnter(Collision collision)
     {
-        Health health = gameObject.GetComponent<Health>();
-        health.RegainHealth(1);
+        Heal(collision.gameObject);
+        Destroy(gameObject);
+    }
+
+    private static void Heal(GameObject target)
+    {
+        Health hp = target.GetComponent<Health>();
+        hp.RegainHealth(1);
     }
 }

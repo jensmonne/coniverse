@@ -3,41 +3,43 @@ using UnityEngine;
 
 public class SpeedPower : MonoBehaviour
 {
-    private bool isBoosting = false;
     private float boostDuration = 5f;
 
-    // ReSharper disable Unity.PerformanceAnalysis
-    private void SpeedUp()
+    private void OnCollisionEnter(Collision collision)
     {
-        PlayerMovement pm = GetComponent<PlayerMovement>();
+        SpeedBoost(collision.gameObject);
+        Destroy(gameObject);
+    }
+    
+    private void SpeedBoost(GameObject target)
+    {
+        PlayerMovement pm = target.GetComponent<PlayerMovement>();
+        if (pm != null)
+        {
+            StartCoroutine(SpeedBoostCoroutine(pm));
+        }
+    }
+    
+    private IEnumerator SpeedBoostCoroutine(PlayerMovement pm)
+    {
+        SpeedUp(pm);
+
+        yield return new WaitForSeconds(boostDuration);
+
+        ResetSpeed(pm);
+    }
+
+    private static void SpeedUp(PlayerMovement pm)
+    {
         pm.acceleration += 20f;
         pm.maxSpeed += 15f;
         pm.rotationSpeed += 75f;
     }
 
-    // ReSharper disable Unity.PerformanceAnalysis
-    private void SpeedDown()
+    private static void ResetSpeed(PlayerMovement pm)
     {
-        PlayerMovement pm = GetComponent<PlayerMovement>();
-        pm.acceleration -= 20f;
-        pm.maxSpeed -= 15f;
-        pm.rotationSpeed -= 75f;
-    }
-
-    public void SpeedBoost()
-    {
-        if (!isBoosting)
-        {
-            StartCoroutine(SpeedBoostCoroutine());
-        }
-    }
-    
-    private IEnumerator SpeedBoostCoroutine()
-    {
-        SpeedUp();
-
-        yield return new WaitForSeconds(boostDuration);
-
-        SpeedDown();
+        pm.acceleration = 20f;
+        pm.maxSpeed = 10f;
+        pm.rotationSpeed = 100f;
     }
 }

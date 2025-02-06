@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class KnockbackPower : MonoBehaviour
 {
-    public void RemoveKnockback()
+    private void OnCollisionEnter(Collision collision)
     {
-        PlayerMovement pm = GetComponent<PlayerMovement>();
-        pm.bumpForce = 0f;
+        KnockbackIncrease(collision.gameObject);
+        Destroy(gameObject);
     }
-
-    public void KnockbackUp()
+    
+    private static void KnockbackIncrease(GameObject target)
     {
-        PlayerMovement pm = GetComponent<PlayerMovement>();
+        PlayerMovement pm = target.GetComponent<PlayerMovement>();
         pm.bumpForce += 600f;
     }
 }
