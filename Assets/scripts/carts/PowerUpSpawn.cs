@@ -2,15 +2,19 @@ using UnityEngine;
 
 public class PowerUpSpawn : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public GameObject powerUpPrefab;
+    public Transform[] spawnPoints; // Assign 4 empty GameObjects as spawn points in the Inspector
+
+    private void Start()
     {
-        
+        SpawnPowerUps();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SpawnPowerUps()
     {
-        
+        foreach (Transform spawnPoint in spawnPoints)
+        {
+            Instantiate(powerUpPrefab, spawnPoint.position, Quaternion.identity);
+        }
     }
 }
