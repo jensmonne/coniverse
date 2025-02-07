@@ -7,7 +7,8 @@ public class DEATHTOTHELORD : MonoBehaviour
         Health health = collision.gameObject.GetComponent<Health>();
         if (health != null)
         {
-            health._currentHealth = 0;
+            health.TakeDamage(42);
+            Debug.Log("DEATH");
         }
     }
 }
