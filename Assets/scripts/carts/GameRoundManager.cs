@@ -50,7 +50,7 @@ public class GameRoundManager : MonoBehaviour
 
     if (GameManager.Instance.IsGameOver())
     {
-        Debug.Log("Game Over");
+        SceneManager.LoadScene("Titlescreen");
     }
     else
     {
@@ -88,7 +88,7 @@ public class GameRoundManager : MonoBehaviour
 
         if (GameManager.Instance.IsGameOver())
         {
-            Debug.Log("Game Over");
+            SceneManager.LoadScene("Titlescreen");
         }
         else
         {
