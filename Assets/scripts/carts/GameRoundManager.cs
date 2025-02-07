@@ -33,42 +33,39 @@ public class GameRoundManager : MonoBehaviour
         Debug.Log($"Round {GameManager.Instance.currentRound} of {GameManager.Instance.totalRounds}");
     }
 
-    public void CheckForRoundWinner()
-{
-    Health survivingPlayer = null;
-    
-    foreach (var player in players)
+    public void CheckForRoundWinner() 
     {
-        if (player.IsAlive)
+        List<Health> alivePlayers = players.Where(player => player.IsAlive).ToList();
+
+        if (alivePlayers.Count == 1) // Only one player alive, they win
         {
-            survivingPlayer = player;
-            break; 
+            var survivingPlayer = alivePlayers[0];
+        
+            GameManager.Instance.AddScore(survivingPlayer.PlayerID, 1);
+            Debug.Log($"Surviving Player: {survivingPlayer.gameObject.name} awarded 1 point.");
+        }
+        else if (alivePlayers.Count == 0) // No players alive, something went wrong
+        {
+            Debug.LogWarning("No surviving player found! Something went wrong.");
+        }
+        else 
+        {
+            // Still more than one player alive, no need to reset scene yet
+            return;
+        }
+
+        // Round end logic
+        if (GameManager.Instance.IsGameOver())
+        {
+            SceneManager.LoadScene("Titlescreen");
+        }
+        else
+        {
+            GameManager.Instance.NextRound();
+            SceneManager.LoadScene("BumperCars 1");
         }
     }
 
-    
-    if (survivingPlayer != null)
-    {
-        // Award points to the player(s) who died
-        GameManager.Instance.AddScore(survivingPlayer.PlayerID, 1);
-        Debug.Log($"Surviving Player: {survivingPlayer.gameObject.name} awarded 1 point.");
-    }
-    else
-    {
-        Debug.LogWarning("No surviving player found! Something went wrong.");
-    }
-
-    if (GameManager.Instance.IsGameOver())
-    {
-        SceneManager.LoadScene("Titlescreen");
-    }
-    else
-    {
-        // Proceed to the next round
-        GameManager.Instance.NextRound();
-        SceneManager.LoadScene("BumperCars");
-    }
-}
 
 
     private void PlayerWins(Health winner)
