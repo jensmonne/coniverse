@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class DamageScript : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("BumperCart"))
+        if (other.gameObject.CompareTag("BumperCart"))
         {
-            Damage(collision.gameObject);
+            Damage(gameObject);
         }
     }
 
