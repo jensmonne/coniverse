@@ -62,7 +62,7 @@ public class GameRoundManager : MonoBehaviour
         else
         {
             GameManager.Instance.NextRound();
-            SceneManager.LoadScene("BumperCars");
+            SceneManager.LoadScene("BumperCars 1");
         }
     }
 
@@ -101,7 +101,7 @@ public class GameRoundManager : MonoBehaviour
         {
             // sets the new round up
             GameManager.Instance.NextRound();
-            SceneManager.LoadScene("BumperCars");
+            SceneManager.LoadScene("BumperCars 1");
         }
     }
 }
