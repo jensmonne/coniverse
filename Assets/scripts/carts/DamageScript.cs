@@ -6,7 +6,7 @@ public class DamageScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("BumperCart"))
         {
-            Damage(gameObject);
+            Damage(other.gameObject);
         }
     }
 
