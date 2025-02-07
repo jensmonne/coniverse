@@ -187,6 +187,7 @@ GameObject:
   - component: {fileID: 5507287272512858435}
   - component: {fileID: 8714281176819868756}
   - component: {fileID: -265176074336725694}
+  - component: {fileID: -4501719790239680290}
   m_Layer: 0
   m_Name: KnockBack
   m_TagString: Untagged
@@ -356,3 +357,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-4501719790239680290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7229133650363714631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5419f86e9fa9da84fac356182a4765f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

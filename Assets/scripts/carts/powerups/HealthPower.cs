@@ -1,15 +1,16 @@
 using UnityEngine;
 
-public class HealthPower : MonoBehaviour
+public class HealthPower : PowerUp
 {
     [SerializeField] private AudioSource audioSource;
 
     private void OnCollisionEnter(Collision collision)
     {
+        HideObject();
         PlaySound();
         Heal(collision.gameObject);
-        HideObject();
         Destroy(gameObject, audioSource.clip.length);
+        CollectPowerUp();
     }
 
     private void HideObject()

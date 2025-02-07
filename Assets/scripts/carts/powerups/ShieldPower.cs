@@ -1,15 +1,16 @@
 using UnityEngine;
 
-public class ShieldPower : MonoBehaviour
+public class ShieldPower : PowerUp
 {    
     [SerializeField] private AudioSource audioSource;
 
     private void OnCollisionEnter(Collision collision)
     {
+        HideObject();
         PlaySound();
         ShieldUp(collision.gameObject);
-        HideObject();
         Destroy(gameObject, audioSource.clip.length);
+        CollectPowerUp();
     }
 
     private void HideObject()
@@ -19,6 +20,11 @@ public class ShieldPower : MonoBehaviour
 
         Collider col = GetComponent<Collider>();
         if (col != null) col.enabled = false;
+        
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
 
     private void PlaySound()

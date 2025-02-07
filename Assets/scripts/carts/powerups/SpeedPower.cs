@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class SpeedPower : MonoBehaviour
+public class SpeedPower : PowerUp
 {
     
     [SerializeField] private AudioSource audioSource;
@@ -10,9 +10,10 @@ public class SpeedPower : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        SpeedBoost(collision.gameObject);
         HideObject();
+        SpeedBoost(collision.gameObject);
         PlaySound();
+        CollectPowerUp();
     }
     
     private void HideObject()
@@ -22,7 +23,13 @@ public class SpeedPower : MonoBehaviour
 
         Collider col = GetComponent<Collider>();
         if (col != null) col.enabled = false;
+        
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
+
     
     private void SpeedBoost(GameObject target)
     {

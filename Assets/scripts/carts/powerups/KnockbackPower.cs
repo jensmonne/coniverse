@@ -1,15 +1,15 @@
 using UnityEngine;
 
-public class KnockbackPower : MonoBehaviour
+public class KnockbackPower : PowerUp
 {
     [SerializeField] private AudioSource audioSource;
 
     private void OnCollisionEnter(Collision collision)
     {
+        HideObject();
         PlaySound();
         KnockbackIncrease(collision.gameObject);
-        HideObject();
-        Destroy(gameObject, audioSource.clip.length);
+        CollectPowerUp();
     }
 
     private void HideObject()
@@ -19,6 +19,11 @@ public class KnockbackPower : MonoBehaviour
 
         Collider col = GetComponent<Collider>();
         if (col != null) col.enabled = false;
+        
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
 
     private void PlaySound()
@@ -29,6 +34,6 @@ public class KnockbackPower : MonoBehaviour
     private static void KnockbackIncrease(GameObject target)
     {
         PlayerMovement pm = target.GetComponent<PlayerMovement>();
-        pm.bumpForce += 600f;
+        if (pm != null) pm.bumpForce += 600f;
     }
 }

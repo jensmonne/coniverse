@@ -3,40 +3,54 @@ using System.Collections;
 
 public class PowerUpSpawn : MonoBehaviour
 {
-    [SerializeField] private GameObject[] powerUpPrefabs;
-    [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private float spawnInterval = 17f;
+    [SerializeField] private GameObject[] powerUpPrefabs; // Different power-up types
+    [SerializeField] private Transform[] spawnPoints; // Possible spawn locations
+
+    private GameObject[] activePowerUps; // Tracks currently active power-ups
 
     private void Start()
     {
-        StartCoroutine(SpawnPowerUpsRoutine());
+        activePowerUps = new GameObject[spawnPoints.Length]; 
+        SpawnInitialPowerUps();
     }
 
-    private IEnumerator SpawnPowerUpsRoutine()
+    private void SpawnInitialPowerUps()
     {
-        while (true)
+        for (int i = 0; i < 4; i++) // Ensure only 4 power-ups spawn at start
         {
-            SpawnPowerUps();
-            yield return new WaitForSeconds(spawnInterval);
+            SpawnPowerUp();
         }
     }
 
-    private void SpawnPowerUps()
+    private void SpawnPowerUp()
     {
-        foreach (Transform spawnPoint in spawnPoints)
+        int randomIndex;
+        do
         {
-            foreach (Transform child in spawnPoint)
-            {
-                Destroy(child.gameObject);
-            }
-        }
+            randomIndex = Random.Range(0, spawnPoints.Length);
+        } while (activePowerUps[randomIndex] != null); // Ensure an empty spawn point
 
-        foreach (Transform spawnPoint in spawnPoints)
+        GameObject powerUpPrefab = powerUpPrefabs[Random.Range(0, powerUpPrefabs.Length)]; // Pick a random power-up
+        GameObject spawnedPowerUp = Instantiate(powerUpPrefab, spawnPoints[randomIndex].position, Quaternion.identity);
+        
+        activePowerUps[randomIndex] = spawnedPowerUp;
+
+        PowerUp powerUpScript = spawnedPowerUp.GetComponent<PowerUp>();
+        if (powerUpScript != null)
         {
-            // Believe me this i think works like i intended it to. Simon is killing himself in the background while typing this!
-            int randomIndex = Random.Range(0, powerUpPrefabs.Length);
-            GameObject powerUpInstance = Instantiate(powerUpPrefabs[randomIndex], spawnPoint.position, Quaternion.identity);
-            powerUpInstance.transform.SetParent(spawnPoint);
+            powerUpScript.SetSpawner(this, randomIndex); // Allow the power-up to notify the spawner when picked up
         }
+    }
+
+    public void PowerUpCollected(int spawnIndex)
+    {
+        activePowerUps[spawnIndex] = null; // Clear the slot
+        StartCoroutine(RespawnPowerUpAfterDelay(spawnIndex, 20f));
+    }
+
+    private IEnumerator RespawnPowerUpAfterDelay(int spawnIndex, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SpawnPowerUp();
     }
 }
