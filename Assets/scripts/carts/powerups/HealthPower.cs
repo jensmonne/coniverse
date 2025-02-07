@@ -11,6 +11,7 @@ public class HealthPower : PowerUp
         Heal(collision.gameObject);
         Destroy(gameObject, audioSource.clip.length);
         CollectPowerUp();
+        Destroy(gameObject);
     }
 
     private void HideObject()
@@ -32,6 +33,4 @@ public class HealthPower : PowerUp
         Health hp = target.GetComponent<Health>();
         hp.RegainHealth(1);
     }
-
-    
 }

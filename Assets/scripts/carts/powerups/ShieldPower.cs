@@ -11,6 +11,7 @@ public class ShieldPower : PowerUp
         ShieldUp(collision.gameObject);
         Destroy(gameObject, audioSource.clip.length);
         CollectPowerUp();
+        Destroy(gameObject);
     }
 
     private void HideObject()

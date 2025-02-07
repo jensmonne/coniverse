@@ -10,6 +10,7 @@ public class KnockbackPower : PowerUp
         PlaySound();
         KnockbackIncrease(collision.gameObject);
         CollectPowerUp();
+        Destroy(gameObject);
     }
 
     private void HideObject()

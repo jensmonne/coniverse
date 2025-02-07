@@ -15,8 +15,7 @@ public class PowerUp : MonoBehaviour
     {
         if (spawner != null)
         {
-            spawner.PowerUpCollected(spawnIndex); // Notify the spawner
+            spawner.PowerUpCollected(spawnIndex);
         }
-        Destroy(gameObject); // Destroy after applying effect
     }
 }
