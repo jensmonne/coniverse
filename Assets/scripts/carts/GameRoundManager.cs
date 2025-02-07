@@ -62,7 +62,7 @@ public class GameRoundManager : MonoBehaviour
         else
         {
             GameManager.Instance.NextRound();
-            SceneManager.LoadScene("BumperCars 1");
+            SceneManager.LoadScene("BumperCars");
         }
     }
 
