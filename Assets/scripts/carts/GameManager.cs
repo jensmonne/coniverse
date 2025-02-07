@@ -28,9 +28,9 @@ public class GameManager : MonoBehaviour
     // sets the counts for the game
     public void InitializeGame(int numPlayers)
     {
-        playerCount = numPlayers; 
-        totalRounds = 3; 
-        currentRound = 1; 
+        playerCount = numPlayers; // sets amount of players
+        totalRounds = 3; // sets amount of rounds
+        currentRound = 1; // starts at round 1
 
         // Initialize player scores
         playerScores = new List<int>(new int[playerCount]);
@@ -46,16 +46,16 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        playerScores[winnerIndex] += score; 
+        playerScores[winnerIndex] += score; // adds the point to the player score
     }
 
     public bool IsGameOver()
     {
-        return currentRound >= totalRounds; 
+        return currentRound >= totalRounds;  // The game is over if we have reached the total rounds
     }
 
     public void NextRound()
     {
-        currentRound++; 
+        currentRound++; // do the current round by 1 up if the total rounds is not reached
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,15 @@ public class GameRoundManager : MonoBehaviour
 {
     public List<Health> players;
     public static GameRoundManager Instance;
+    [SerializeField] private GameManager gm;
+
+    private void Awake()
+    {
+        if (gm == null)
+        {
+            gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        }
+    }
 
     private void Start()
     {

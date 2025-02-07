@@ -5,7 +5,8 @@ public class TitlescreenButtons : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("BumperCars");
+        GameManager.Instance.InitializeGame(numPlayers: 3);
+        SceneManager.LoadScene("BumperCars 1");
     }
 
     public void ExitGame()
