@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
     public bool IsAlive = true;
     private int maxHealth = 4; 
     private int maxShield = 2;
-    [SerializeField] private int _currentHealth; 
+    public int _currentHealth; 
     [SerializeField] private int _currentShield;
     private Animator _animator; 
 
