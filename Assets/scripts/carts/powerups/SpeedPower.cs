@@ -3,12 +3,16 @@ using UnityEngine;
 
 public class SpeedPower : MonoBehaviour
 {
+    
+    [SerializeField] private AudioSource audioSource;
+
     private float boostDuration = 5f;
 
     private void OnCollisionEnter(Collision collision)
     {
         SpeedBoost(collision.gameObject);
         HideObject();
+        PlaySound();
     }
     
     private void HideObject()
@@ -51,5 +55,10 @@ public class SpeedPower : MonoBehaviour
         pm.acceleration = 20f;
         pm.maxSpeed = 10f;
         pm.rotationSpeed = 100f;
+    }
+
+    private void PlaySound()
+    {
+        audioSource.Play();
     }
 }
