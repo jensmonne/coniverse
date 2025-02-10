@@ -27,7 +27,7 @@ public class GameRoundManager : MonoBehaviour
 
         for (int i = 0; i < players.Count; i++)
         {
-            players[i].PlayerID = i;  
+            players[i].PlayerID = i;
         }
 
         Debug.Log($"Round {GameManager.Instance.currentRound} of {GameManager.Instance.totalRounds}");
